@@ -1,0 +1,66 @@
+<view class="container">
+  <!-- 个人信息 -->
+  <view class="section">
+    <view class="section-title">👤 个人信息</view>
+    <view class="card">
+      <view class="field">
+        <text class="field-label">昵称</text>
+        <input
+          class="field-input"
+          placeholder="想让AI怎么称呼你呢？"
+          placeholder-style="color:#C4B5B0;"
+          value="{{nickname}}"
+          bindinput="onNicknameInput"
+        />
+      </view>
+      <view class="field-tip">填入后，AI在总结时会用这个昵称称呼你 🌷</view>
+    </view>
+  </view>
+
+  <!-- AI配置 -->
+  <view class="section">
+    <view class="section-title">🤖 AI总结配置</view>
+    <view class="card">
+      <view class="field">
+        <text class="field-label">豆包 API Key</text>
+        <input
+          class="field-input"
+          placeholder="请输入API Key"
+          placeholder-style="color:#C4B5B0;"
+          password="{{true}}"
+          value="{{doubaoApiKey}}"
+          bindinput="onApiKeyInput"
+        />
+      </view>
+      <view class="field">
+        <text class="field-label">模型名称（可留空）</text>
+        <input
+          class="field-input"
+          placeholder="默认：doubao-seed-1-6-flash-250515"
+          placeholder-style="color:#C4B5B0;"
+          value="{{doubaoModel}}"
+          bindinput="onModelInput"
+        />
+      </view>
+      <view class="field-tip">💡 不填也可以使用，会显示温柔的示例文案</view>
+    </view>
+  </view>
+
+  <!-- 数据管理 -->
+  <view class="section">
+    <view class="section-title">💾 数据管理</view>
+    <view class="card">
+      <view class="data-info">
+        <text class="data-label">本地已记录</text>
+        <text class="data-count">{{entryCount}} 天</text>
+      </view>
+      <button class="export-btn" bindtap="handleExport">📦 导出所有数据</button>
+      <view class="privacy-tip">🔒 你的日记只保存在本地，不会上传任何服务器</view>
+    </view>
+  </view>
+
+  <!-- 保存按钮 -->
+  <button class="save-btn" bindtap="handleSave" disabled="{{!dirty}}">
+    {{saved ? '✓ 已保存' : '💖 保存设置'}}
+  </button>
+</view>

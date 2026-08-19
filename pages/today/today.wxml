@@ -1,0 +1,46 @@
+<view class="container">
+  <!-- 日期标题 -->
+  <view class="date-header">
+    <text class="date-text">{{today}}</text>
+    <text class="date-sub">记录每一个闪光的日子</text>
+  </view>
+
+  <!-- 四大板块 -->
+  <view class="categories">
+    <view class="category-card" wx:for="{{categories}}" wx:key="key" style="background:{{item.bgColor}};">
+      <view class="cat-header">
+        <text class="cat-emoji">{{item.emoji}}</text>
+        <text class="cat-label" style="color:{{item.color}};">{{item.label}}</text>
+      </view>
+      <textarea
+        class="cat-input"
+        placeholder="{{item.placeholder}}"
+        placeholder-style="color:#C4B5B0;"
+        value="{{inputs[item.key]}}"
+        data-key="{{item.key}}"
+        bindinput="onInput"
+        maxlength="-1"
+        auto-height
+      />
+    </view>
+  </view>
+
+  <!-- 进度条 -->
+  <view class="progress-bar">
+    <view class="progress-fill" style="width:{{filledCount * 25}}%;" />
+    <text class="progress-text">{{filledCount}}/4 已记录</text>
+  </view>
+
+  <!-- AI总结 -->
+  <view class="summary-section">
+    <button class="summary-btn" bindtap="generateSummary" loading="{{summaryLoading}}" disabled="{{summaryLoading}}">
+      {{summaryLoading ? '正在生成...' : '✨ 生成今日总结'}}
+    </button>
+    <view class="summary-card" wx:if="{{summary}}">
+      <text class="summary-text">{{summary}}</text>
+    </view>
+    <view class="no-key-tip" wx:if="{{!hasApiKey && !summary}}">
+      <text>💡 未配置API Key，将显示温柔的示例文案</text>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,57 @@
+<view class="container">
+  <!-- 月份导航 -->
+  <view class="month-nav">
+    <view class="nav-btn" bindtap="prevMonth">‹</view>
+    <text class="month-label">{{monthLabel}}</text>
+    <view class="nav-btn" bindtap="nextMonth">›</view>
+  </view>
+
+  <!-- 统计卡片 -->
+  <view class="stats-card">
+    <view class="stat-row">
+      <view class="stat-item">
+        <text class="stat-num">{{entryCount}}</text>
+        <text class="stat-label">天记录</text>
+      </view>
+    </view>
+    <view class="cat-stats">
+      <view class="cat-stat">
+        <text class="cat-stat-emoji">💪</text>
+        <text class="cat-stat-num">{{catStats.exercise || 0}}</text>
+      </view>
+      <view class="cat-stat">
+        <text class="cat-stat-emoji">👭</text>
+        <text class="cat-stat-num">{{catStats.social || 0}}</text>
+      </view>
+      <view class="cat-stat">
+        <text class="cat-stat-emoji">📚</text>
+        <text class="cat-stat-num">{{catStats.study || 0}}</text>
+      </view>
+      <view class="cat-stat">
+        <text class="cat-stat-emoji">🎬</text>
+        <text class="cat-stat-num">{{catStats.entertainment || 0}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 生成按钮 -->
+  <button class="generate-btn" bindtap="generateMonthly" loading="{{summaryLoading}}" disabled="{{summaryLoading}}">
+    {{summaryLoading ? '正在生成...' : '🌙 生成月度总结报告'}}
+  </button>
+
+  <!-- 月度报告 -->
+  <view class="report-card" wx:if="{{monthlySummary}}">
+    <view class="report-header">
+      <text class="report-title">📋 月度生活报告</text>
+    </view>
+    <view class="report-body">
+      <text class="report-text">{{monthlySummary}}</text>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{!monthlySummary && !summaryLoading}}">
+    <text class="empty-icon">🌙</text>
+    <text class="empty-text">点击上方按钮，AI会为你生成一份温柔的月度复盘</text>
+  </view>
+</view>

@@ -1,0 +1,55 @@
+<view class="container">
+  <!-- 月份导航 -->
+  <view class="month-nav">
+    <view class="nav-btn" bindtap="prevMonth">‹</view>
+    <text class="month-label">{{monthLabel}}</text>
+    <view class="nav-btn" bindtap="nextMonth">›</view>
+  </view>
+
+  <!-- 日历网格 -->
+  <view class="calendar">
+    <view class="week-row">
+      <text class="week-cell">日</text>
+      <text class="week-cell">一</text>
+      <text class="week-cell">二</text>
+      <text class="week-cell">三</text>
+      <text class="week-cell">四</text>
+      <text class="week-cell">五</text>
+      <text class="week-cell">六</text>
+    </view>
+    <view class="day-grid">
+      <view
+        wx:for="{{calendarCells}}"
+        wx:key="index"
+        class="day-cell {{item ? '' : 'empty'}}"
+        data-date="{{item.date}}"
+        bindtap="selectDay"
+      >
+        <text wx:if="{{item}}" class="day-num">{{item.day}}</text>
+        <view wx:if="{{item && entriesMap[item.date]}}" class="day-dot" />
+      </view>
+    </view>
+  </view>
+
+  <!-- 选中日期详情 -->
+  <view class="detail-card" wx:if="{{selectedDate}}">
+    <view class="detail-header">
+      <text class="detail-date">{{selectedDate}}</text>
+    </view>
+    <view wx:if="{{selectedEntry}}" class="detail-content">
+      <view class="detail-cat" wx:for="{{categories}}" wx:key="key">
+        <block wx:if="{{selectedEntry.categories[item.key] && selectedEntry.categories[item.key].content}}">
+          <text class="cat-emoji">{{item.emoji}} {{item.label}}</text>
+          <text class="cat-content">{{selectedEntry.categories[item.key].content}}</text>
+        </block>
+      </view>
+      <view class="detail-summary" wx:if="{{selectedEntry.summary}}">
+        <text class="summary-label">✨ 当日总结</text>
+        <text class="summary-text">{{selectedEntry.summary}}</text>
+      </view>
+    </view>
+    <view wx:else class="no-record">
+      <text>这一天还没有记录哦～</text>
+    </view>
+  </view>
+</view>

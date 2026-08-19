@@ -1,0 +1,17 @@
+{
+  "description": "她记 - 女性生活日记小程序",
+  "packOptions": {
+    "ignore": [],
+    "include": []
+  },
+  "setting": {
+    "es6": true,
+    "postcss": true,
+    "minified": true
+  },
+  "compileType": "miniprogram",
+  "libVersion": "latest",
+  "appid": "",
+  "projectname": "lifejournal-miniprogram",
+  "condition": {}
+}

@@ -1,0 +1,10 @@
+/* 全局样式 - 暖色调女性友好风格 */
+/* 主色调: #EC4899 (玫瑰粉) */
+/* 文字色: #4A3F44 (暖灰棕) */
+/* 背景色: #FFF5F5 (暖粉) */
+
+page {
+  background: linear-gradient(180deg, #FFF5F5 0%, #FFFAF0 50%, #FFF0F5 100%);
+  font-family: -apple-system, sans-serif;
+  color: #4A3F44;
+}

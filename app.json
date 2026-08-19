@@ -1,0 +1,39 @@
+{
+  "pages": [
+    "pages/today/today",
+    "pages/calendar/calendar",
+    "pages/monthly/monthly",
+    "pages/settings/settings"
+  ],
+  "window": {
+    "navigationBarTitleText": "她记",
+    "navigationBarBackgroundColor": "#FFF5F5",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#FFF5F5"
+  },
+  "tabBar": {
+    "color": "#B5A9AD",
+    "selectedColor": "#EC4899",
+    "backgroundColor": "#FFFAFA",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/today/today",
+        "text": "今日记录📝"
+      },
+      {
+        "pagePath": "pages/calendar/calendar",
+        "text": "日历🗓️"
+      },
+      {
+        "pagePath": "pages/monthly/monthly",
+        "text": "月度总结🌙"
+      },
+      {
+        "pagePath": "pages/settings/settings",
+        "text": "设置⚙️"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

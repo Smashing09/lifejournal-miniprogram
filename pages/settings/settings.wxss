@@ -1,0 +1,100 @@
+.container {
+  padding: 30rpx;
+  min-height: 100vh;
+}
+
+.section {
+  margin-bottom: 40rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #4A3F44;
+  margin-bottom: 20rpx;
+}
+
+.card {
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 32rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0,0,0,0.04);
+}
+
+.field {
+  margin-bottom: 24rpx;
+}
+
+.field-label {
+  display: block;
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #4A3F44;
+  margin-bottom: 12rpx;
+}
+
+.field-input {
+  width: 100%;
+  height: 80rpx;
+  background: #FFF5F5;
+  border-radius: 16rpx;
+  padding: 0 24rpx;
+  font-size: 28rpx;
+  color: #4A3F44;
+  box-sizing: border-box;
+}
+
+.field-tip {
+  font-size: 24rpx;
+  color: #B5A9AD;
+  margin-top: 8rpx;
+}
+
+.data-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+
+.data-label {
+  font-size: 28rpx;
+  color: #4A3F44;
+}
+
+.data-count {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #EC4899;
+}
+
+.export-btn {
+  background: #FFF0F5;
+  color: #EC4899;
+  border: none;
+  border-radius: 16rpx;
+  font-size: 28rpx;
+  padding: 20rpx 0;
+  margin-bottom: 16rpx;
+}
+
+.privacy-tip {
+  text-align: center;
+  font-size: 22rpx;
+  color: #B5A9AD;
+}
+
+.save-btn {
+  background: linear-gradient(135deg, #EC4899, #F472B6);
+  color: #fff;
+  border: none;
+  border-radius: 24rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  padding: 24rpx 0;
+  margin-top: 20rpx;
+}
+
+.save-btn[disabled] {
+  opacity: 0.5;
+}
