@@ -2,10 +2,10 @@ const storage = require('../../utils/storage');
 const ai = require('../../utils/ai');
 
 const CATEGORIES = [
-  { key: 'exercise', label: '运动', emoji: '💪', color: '#E11D48', bgColor: '#FFF1F2', placeholder: '今天做了什么运动？跑步、瑜伽、散步都可以记录下来～' },
-  { key: 'social', label: '社交', emoji: '👭', color: '#D97706', bgColor: '#FFFBEB', placeholder: '今天和谁见面了？有什么暖心的对话或聚会？' },
-  { key: 'study', label: '学习', emoji: '📚', color: '#0284C7', bgColor: '#F0F9FF', placeholder: '今天学了什么新技能？读了什么书？看了什么课程？' },
-  { key: 'entertainment', label: '娱乐', emoji: '🎬', color: '#7C3AED', bgColor: '#F5F3FF', placeholder: '今天看了什么电影/剧？听了什么歌？有什么开心的小事？' },
+  { key: 'exercise', label: '运动', emoji: '💪', color: '#E11D48', bgColor: '#FFF1F2', placeholder: '今天做了什么运动？' },
+  { key: 'social', label: '社交', emoji: '👭', color: '#D97706', bgColor: '#FFFBEB', placeholder: '和谁见面了？有什么暖心的对话？' },
+  { key: 'study', label: '学习', emoji: '📚', color: '#0284C7', bgColor: '#F0F9FF', placeholder: '学了什么新技能？读了什么书？' },
+  { key: 'entertainment', label: '娱乐', emoji: '🎬', color: '#7C3AED', bgColor: '#F5F3FF', placeholder: '看了什么剧？有什么开心的小事？' },
 ];
 
 Page({
@@ -18,6 +18,7 @@ Page({
     summary: '',
     summaryLoading: false,
     hasApiKey: false,
+    showSummaryModal: false,
   },
 
   onLoad() {
@@ -54,9 +55,7 @@ Page({
     const value = e.detail.value;
     const inputs = { ...this.data.inputs };
     inputs[key] = value;
-    // 保存到storage
     storage.saveCategoryContent(this.data.today, key, value);
-    // 重新计算filledCount
     let filledCount = 0;
     Object.values(inputs).forEach(v => { if (v && v.trim()) filledCount++; });
     this.setData({ inputs, filledCount });
@@ -69,7 +68,6 @@ Page({
       const settings = storage.getSettings();
       const provider = ai.getAIProvider(settings.doubaoApiKey, settings.doubaoModel);
       const entry = storage.getEntry(this.data.today) || { date: this.data.today, categories: {} };
-      // 用最新的inputs更新entry
       CATEGORIES.forEach(c => {
         if (this.data.inputs[c.key] && this.data.inputs[c.key].trim()) {
           entry.categories[c.key] = { content: this.data.inputs[c.key], updatedAt: new Date().toISOString() };
@@ -77,11 +75,27 @@ Page({
       });
       const summary = await provider.generateDailySummary(entry, settings.nickname);
       storage.saveDailySummary(this.data.today, summary);
-      this.setData({ summary, summaryLoading: false });
-      wx.showToast({ title: '总结已生成', icon: 'success' });
+      this.setData({ summary, summaryLoading: false, showSummaryModal: true });
     } catch (err) {
       this.setData({ summaryLoading: false });
       wx.showToast({ title: err.message || '生成失败', icon: 'none' });
     }
+  },
+
+  closeModal() {
+    this.setData({ showSummaryModal: false });
+  },
+
+  preventTouchMove() {
+    // 阻止冒泡，不做任何事
+  },
+
+  copySummary() {
+    wx.setClipboardData({
+      data: this.data.summary,
+      success() {
+        wx.showToast({ title: '已复制', icon: 'success' });
+      },
+    });
   },
 });
